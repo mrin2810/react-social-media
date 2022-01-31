@@ -1,16 +1,21 @@
-import React from "react";
+import React, { useState } from "react";
 import ReactDom from "react-dom";
 
 function App() {
+
+    const [inputValue, setInputValue] = useState('some text');
+
     function handleInputChange(event) {
-        const inputValue = event.target.value; 
-        console.log(inputValue);
+        setInputValue(event.target.value); 
     }
 
     return (
-        <div>
-            <input onChange={handleInputChange}/>
-        </div>
+        <>
+            <div>
+                <input onChange={handleInputChange}/>
+            </div>
+            {inputValue}
+        </>
     )
 }
 
