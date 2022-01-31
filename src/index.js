@@ -2,19 +2,30 @@ import React, { useState } from "react";
 import ReactDom from "react-dom";
 
 function App() {
-
-    const [inputValue, setInputValue] = useState('some text');
-
-    function handleInputChange(event) {
-        setInputValue(event.target.value); 
-    }
+    const [developer, setDeveloper] = useState({
+        lang: 'python',
+        yoe: 0,
+    });
 
     return (
         <>
             <div>
-                <input onChange={handleInputChange}/>
+                <button onClick={() => setDeveloper({
+                    lang: 'JS',
+                    yoe: 2
+                })}>Change Language</button>
             </div>
-            {inputValue}
+            <p>
+                <input
+                    type="number"
+                    onChange={(event) => setDeveloper({
+                        ...developer,
+                        yoe: event.target.value
+                    })}
+                />
+            </p>
+            <p>I am learning {developer.lang}.</p>
+            <p>I have {developer.yoe} years of Experience. </p>
         </>
     )
 }
