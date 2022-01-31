@@ -4,8 +4,8 @@ import ReactDom from "react-dom";
 function Person(props) {
     function handlePersonClick() {
         alert(props.person);
+        console.log(props.person);
     }
-    
     return <li onClick={handlePersonClick}>{props.person}</li>
 }
 
