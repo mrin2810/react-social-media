@@ -1,3 +1,4 @@
+import { cleanup } from "@testing-library/react";
 import React, { useState } from "react";
 import ReactDom from "react-dom";
 import { useEffect } from "react/cjs/react.development";
@@ -17,7 +18,9 @@ function App() {
 
     useEffect(() => {
         document.addEventListener('mousemove', handleMouseMove);
-    }, [])
+        return () => document.removeEventListener('mousemove', handleMouseMove);
+    }, []);
+
     return (
         <div>
             <p>x-coordinate: {mousePosition.x}</p>
@@ -26,5 +29,13 @@ function App() {
     )
 }
 
+function NewApp() {
+    return <div></div>
+}
+
 const rootNode = document.getElementById("root");
 ReactDom.render(<App />, rootNode);
+
+setTimeout(() => {
+    ReactDom.render(<NewApp />, rootNode);
+}, 3000)
