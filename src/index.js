@@ -1,13 +1,15 @@
 import React from "react";
 import ReactDom from "react-dom";
 
-function App() {
+import App from './App';
+
+function ReactSocialMedia() {
     return (
         <>
-            <div>App</div>
+            <App />
         </>
     )
 }
 
 const rootNode = document.getElementById("root");
-ReactDom.render(<App />, rootNode);
+ReactDom.render(<ReactSocialMedia />, rootNode);
