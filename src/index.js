@@ -1,41 +1,28 @@
-import { cleanup } from "@testing-library/react";
-import React, { useState } from "react";
+import React from "react";
 import ReactDom from "react-dom";
-import { useEffect } from "react/cjs/react.development";
+import { useEffect, useState } from "react/cjs/react.development";
 
+const endpoint = 'https://api.github.com/users/mrin2810';
 function App() {
-    const [mousePosition, setMousePosition] = useState({
-        x: 0,
-        y: 0,
-    });
 
-    function handleMouseMove(event) {
-        setMousePosition({
-            x: event.pageX,
-            y: event.pageY,
-        });
-    }
+    const [user, setUser] = useState(null);
 
     useEffect(() => {
-        document.addEventListener('mousemove', handleMouseMove);
-        return () => document.removeEventListener('mousemove', handleMouseMove);
+        fetch(endpoint)
+            .then(response => response.json())
+            .then(data => {
+                console.log(data);
+                setUser(data);
+            });
     }, []);
 
     return (
-        <div>
-            <p>x-coordinate: {mousePosition.x}</p>
-            <p>y-coordinate: {mousePosition.y}</p>
-        </div>
+        <>
+            <div>{user && user.name}</div>
+            <div>{user && user.html_url}</div>
+        </>
     )
-}
-
-function NewApp() {
-    return <div></div>
 }
 
 const rootNode = document.getElementById("root");
 ReactDom.render(<App />, rootNode);
-
-setTimeout(() => {
-    ReactDom.render(<NewApp />, rootNode);
-}, 3000)
