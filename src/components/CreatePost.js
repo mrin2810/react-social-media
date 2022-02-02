@@ -1,8 +1,15 @@
-import React from "react";
+import React, { useState } from "react";
 
-function CreatePost() {
+function CreatePost({ user, posts, setPosts }) {
+    const [content, setContent] = useState('');
+    const [image, setImage] = useState(null);
+
+
     function handleSubmit(event) {
         event.preventDefault();
+        const post = { content, image, user };
+        const newPosts = [post, ...posts];
+        setPosts(newPosts);
     }
     return (
         <>
@@ -12,9 +19,11 @@ function CreatePost() {
                     <input 
                         type="text"
                         placeholder="Add Post Content"
+                        onChange={(event) => setContent(event.target.value)}
                     />
                     <input
                         type="file"
+                        onChange={(event) => setImage(event.target.files[0])}
                     />
                     <button type="submit">Submit Post</button>
                 </form>
