@@ -10,6 +10,7 @@ function CreatePost({ user, posts, setPosts }) {
         const newPosts = [post, ...posts];
         setPosts(newPosts);
         setContent('');
+        setImage(null);
         imageInputRef.current.value = '';
     }
 
