@@ -4,7 +4,7 @@ function Login({setUser}) {
     const [username, setUsername] = useState('');
 
     function handleSubmit(event) {
-        event.preventDefault();
+        event.preventDefault(); //prevents page refresh.
         setUser(username);
     }
 
