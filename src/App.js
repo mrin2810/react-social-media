@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { createContext, useState } from 'react';
 import { useCallback, useEffect } from 'react/cjs/react.development';
 
 import Login from './components/Login';
@@ -6,8 +6,10 @@ import Header from './components/Header';
 import CreatePost from './components/CreatePost';
 import PostList from './components/PostList';
 
+export const UserContext = createContext();
+
 function App() {
-    const [user, setUser] = useState();
+    const [user, setUser] = useState('Mrinmayee');
     const [posts, setPosts] = useState([]);
     
     useEffect(() => {
@@ -22,11 +24,12 @@ function App() {
         return <Login setUser={setUser} />
     }
 
-    return (<>
+    return (
+    <UserContext.Provider value={user}>
         <Header user={user} setUser={setUser} />
         <CreatePost user={user} handleAddPost={handleAddPost} />
         <PostList posts={posts} />
-    </>)
+    </UserContext.Provider>)
 }
 
 export default App;
